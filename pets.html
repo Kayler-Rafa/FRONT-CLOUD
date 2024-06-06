@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Cadastro de Pets</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="Cadastro">
+      <div class="container">
+        <form class="needs-validation" id="petForm" novalidate>
+          <!-- <h1 style="text-align: center">Cadastro de Pets</h1> -->
+          <a href="index.html" style="padding-top: 50px;"><button type="button" class="btn btn-light" >Voltar</button></a>
+          <div id="clienteInfo">
+            <!-- Aqui serão exibidas as informações do cliente -->
+          </div>
+          <h1 style="text-align: center; margin-top: 20px;">Pets</h1>
+          <div id="petForms">
+            <!-- Aqui serão exibidos os formulários de cadastro de pets -->
+            <div class="form-row">
+              <div class="col-md-4 mb-3">
+                <input type="hidden" value="" name="dono" id="idDono"/>
+                <label for="nomePet">Nome do Pet</label>
+                <input type="text" class="form-control" id="nomePet" name="nome" placeholder="Nome do Pet" required />
+                <div class="valid-feedback">Nome do pet preenchido</div>
+                <div class="invalid-feedback">Por favor, preencha o nome do pet</div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="tipoPet">Tipo</label>
+                <input type="text" class="form-control" id="especiePet" name="especie" placeholder="Cachorro, Gato, etc." required />
+                <div class="valid-feedback">Tipo preenchido</div>
+                <div class="invalid-feedback">
+                  Por favor, preencha o tipo do pet
+                </div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="corPet">Cor</label>
+                <input type="text" class="form-control" id="corPet" name="cor" placeholder="Cor do pet" required />
+                <div class="valid-feedback">Cor preenchida</div>
+                <div class="invalid-feedback">Por favor, preencha a cor do pet</div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="idadePet">Idade</label>
+                <input type="number" class="form-control" id="idadePet" name="idade" placeholder="Idade do Pet" required />
+                <div class="valid-feedback">Idade preenchida</div>
+                <div class="invalid-feedback">Por favor, preencha a idade do pet</div>
+              </div>
+              
+              <div class="col-md-4 mb-3">
+                  <label for="idCliente"">ID do dono</label>
+                  <input type="input" class="form-control" id="idCliente" name="dono" value="" disabled/>
+                  <div class="valid-feedback">ID preenchido</div>
+                  <div class="invalid-feedback">Por favor, preencha o ID do pet</div>
+                </div>
+                <div class="col-md-4 mb-3">
+                  <label for="nomeClient">Nome do dono</label>
+                  <input type="input" class="form-control" id="nomeCliente" name="dono.nome" value="" disabled/>
+                  <div class="valid-feedback">Nome do cliente preenchido</div>
+                  <div class="invalid-feedback">Por favor, preencha o nome do cliente</div>
+                </div>
+            </div>
+          </div>
+          <div>
+            <button onclick="mostrarPatch()" id="adicionarPet" class="btn btn-secondary" type="button">
+              <i class="fas fa-plus"></i>Editar informações do Cliente
+            </button>
+            <button id="salvarPet" class="btn btn-primary" type="submit">
+              <i class="fas fa-save"></i>Salvar
+            </button>
+            <button onclick="limparForm()" class="btn btn-danger" type="button">
+              <i class="fas fa-times"></i>Cancelar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="container">
+      <form id="formPessoa" class="needs-validation" style="display: none;" novalidate>
+        <h1 style="text-align: center">Atualizar Cliente</h1>
+        <div class="form-row">
+          <div class="col-md-4 mb-3">
+            <input type="hidden" value="" name="id" id="id" />
+            <label for="nome">Nome</label>
+            <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome" required />
+            <div class="valid-feedback">Nome preenchido</div>
+            <div class="invalid-feedback">Por favor, preencha o nome</div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="cpf">CPF</label>
+            <input type="text" class="form-control" id="cpf" name="cpf" placeholder="000.000.000-00" required/>
+            <div class="valid-feedback">CPF preenchida</div>
+            <div class="invalid-feedback">Por favor, preencha o CPF</div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="email">Email</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroupPrepend">@</span>
+              </div>
+              <input type="text" autocomplete="off" class="form-control" id="email" name="email" placeholder="Email"
+                aria-describedby="inputGroupPrepend" required />
+              <div class="valid-feedback">Email Preenchido</div>
+              <div class="invalid-feedback">Por favor, preencha o email.</div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="telefone">Telefone</label>
+            <div class="input-group">
+              <input type="text" autocomplete="off" class="form-control" id="telefone" name="telefone"
+                placeholder="(99) 99999-9999" aria-describedby="inputGroupPrepend" required />
+              <div class="valid-feedback">Número Preenchido</div>
+              <div class="invalid-feedback">Por favor, preencha o Número.</div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="rua">Rua</label>
+            <div class="input-group">
+              <input type="text" autocomplete="off" class="form-control" id="rua" name="endereco.rua"
+                placeholder="R. Abdo Cabus 315" aria-describedby="inputGroupPrepend" required />
+              <div class="valid-feedback">Rua Preenchida</div>
+              <div class="invalid-feedback">Por favor, preencha a Rua.</div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="bairro">Bairro</label>
+            <div class="input-group">
+              <input type="text" autocomplete="off" class="form-control" id="bairro" name="endereco.bairro"
+                placeholder="Boa Viagem" aria-describedby="inputGroupPrepend" required />
+              <div class="valid-feedback">Bairro Preenchido</div>
+              <div class="invalid-feedback">Por favor, preencha o Bairro.</div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="cidade">Cidade</label>
+            <div class="input-group">
+              <input type="text" autocomplete="off" class="form-control" id="cidade" name="endereco.cidade"
+                placeholder="Recife" aria-describedby="inputGroupPrepend" required />
+              <div class="valid-feedback">Cidade Preenchida</div>
+              <div class="invalid-feedback">Por favor, preencha a Cidade.</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <button id="salvarPessoa" class="btn btn-primary" type="submit">
+            <i class="fas fa-save"></i> Atualizar
+          </button>
+          <button onclick="mostrarPost()" class="btn btn-danger" type="button">
+            <i class="fas fa-times"></i> Cancelar
+          </button>
+        </div>
+      </form>
+    </div>
+    
+    <div class="tablecont" style="display: flex; justify-content: center; margin-top: 40px;">
+      <table class="table" style="width: 90%;">
+        <thead class="thead-light">
+          <tr>
+            <th colspan="8" style="text-align: center;">Informações do Cliente</th>
+          </tr>
+          <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">CPF</th>
+            <th scope="col">Email</th>
+            <th scope="col">Telefone</th>
+            <th scope="col">Rua</th>
+            <th scope="col">Bairro</th>
+            <th scope="col">Cidade</th>
+            <th scope="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody id="infoCliente">
+          <!-- Aqui serão exibidas as informações do cliente -->
+        </tbody>
+      </table>
+    </div>
+    <div class="tablecont" style="display: flex; justify-content: center; margin-top: 40px;">
+      <table class="table" style="width: 80%;">
+        <thead class="thead-light">
+          <tr>
+            <th colspan="6" style="text-align: center;">Pets do Cliente</th>
+          </tr>
+          <tr>
+            <th scope="col">#ID Pet</th>
+            <th scope="col">Nome do Pet</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Raça</th>
+            <th scope="col">Idade</th>
+            <th scope="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody id="infoPets">
+          <!-- Aqui serão exibidas as informações dos pets -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
+    integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
+    crossorigin="anonymous"></script>
+  
+  <script src="./modulesPets/filtrarInfos.js"></script>
+  <script src="./modulesPets/filtrarDono.js"></script>
+  <script src="./modulesPets/filtrarIdNome.js"></script>
+  <script src="./modulesPets/mostrarPatch.js"></script>
+  <script src="./modulesPets/mostrarPost.js"></script>
+  <script src="./modulesPets/limparForm.js"></script>
+  <script src="./modulesPets/deletarPessoa.js"></script>
+  <script src="./modulesPets/editarPessoa.js"></script>
+  <script src="./modulesPets/deletarPessoa.js"></script>
+  <script src="./modulesPets/editarPessoa.js"></script>
+  <script src="./modulesPets/editarPet.js"></script>
+  <script src="./modulesPets/validForm.js"></script>
+  <script src="./modulesPets/eventList.js"></script>
+  <script src="./modulesPets/validarCampos.js"></script>
+  <script src="./modulesPets/filtrarPets.js"></script>
+  <script src="./modulesPets/deletarPet.js"></script>
+  <script src="./modulesPets/eventListPet.js"></script>
+  <script src="./modulesPets/salvarPet.js"></script>
+  
+</body>
+</html>
